@@ -9,7 +9,7 @@ api = FastAPI(title="Beerlog")
 
 
 @api.get("/beers/", response_model=List[Beer])
-def list_beers(style: Optional[str] = None):
+async def list_beers(style: Optional[str] = None):
     """Lists beers from the database"""
     beers = get_beers_from_database(style)
     return beers

@@ -13,13 +13,13 @@ console = Console()
 
 @main.command("add")
 def add(
-        name: str,
-        style: str,
-        flavor: int = typer.Option(...),
-        image: int = typer.Option(...),
-        cost: int = typer.Option(...)
+    name: str,
+    style: str,
+    flavor: int = typer.Option(...),
+    image: int = typer.Option(...),
+    cost: int = typer.Option(...),
 ):
-    """Adds anew beer to database"""
+    """Adds a new beer to database"""
     if add_beer_to_database(name, style, flavor, image, cost):
         print(":beer_mug: Beer added to database.")
     else:
@@ -30,8 +30,19 @@ def add(
 def list_beers(style: Optional[str] = None):
     """Lists beers in database"""
     beers = get_beers_from_database(style)
-    table = Table(title="Beerlog Database" if not style else f"Beerlog {style}")
-    headers = ["id", "name", "style", "flavor", "image", "cost", "rate", "date"]
+    table = Table(
+        title="Beerlog Database" if not style else f"Beerlog {style}"
+    )
+    headers = [
+        "id",
+        "name",
+        "style",
+        "flavor",
+        "image",
+        "cost",
+        "rate",
+        "date",
+    ]
     for header in headers:
         table.add_column(header, style="magenta")
     for beer in beers:
@@ -39,5 +50,3 @@ def list_beers(style: Optional[str] = None):
         values = [str(getattr(beer, header)) for header in headers]
         table.add_row(*values)
     console.print(table)
-
-

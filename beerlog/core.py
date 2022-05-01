@@ -5,11 +5,11 @@ from beerlog.models import Beer
 
 
 def add_beer_to_database(
-    name: str,
-    style: str,
-    flavor: int,
-    image: int,
-    cost: int,
+        name: str,
+        style: str,
+        flavor: int,
+        image: int,
+        cost: int,
 ) -> bool:
     with get_session() as session:
         beer = Beer(**locals())
